@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import Datatable, { createTheme } from "react-data-table-component";
 
 function App() {
+  const [users, setUsers] = useState([]);
+
+  const URL = "https://gorest.co.in/public/v2/users";
+  const showdata = async () => {
+    const response = await fetch(URL);
+    const data = await response.json();
+    setUsers(data);
+  };
+
+  useEffect(() => {
+    showdata();
+  }, []);
+
+  const columns = [
+    {
+      name: "ID",
+      selector: (row) => row.id,
+    },
+    {
+      name: "name",
+      selector: (row) => row.name,
+    },
+    {
+      name: "email",
+      selector: (row) => row.email,
+    },
+  ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Datatable columns={columns} data={users} />
     </div>
   );
 }
