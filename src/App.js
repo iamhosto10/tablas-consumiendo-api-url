@@ -1,11 +1,11 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 //import Datatable, { createTheme } from "react-data-table-component";
 import DataTable from "react-data-table-component";
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [columnas, setColumnas] = useState([]);
+  let [users, setUsers] = useState([]);
+  let [columnas, setColumnas] = useState([]);
   let [inputValue, setInputValue] = useState("");
 
   const showdata = async (pagina) => {
@@ -13,20 +13,58 @@ function App() {
     const response = await fetch(pagina);
     const data = await response.json();
     setUsers(data);
+    console.log(users);
     console.log(data);
     // data.map((prueba, index) => console.log(index));
-    data.forEach((element) => {
-      element.forEach((ele) => {
-        console.log(ele.id);
+    console.log(Object.keys(data[0]));
+
+    // const columns = [
+    //   {
+    //     name: "ID",
+    //     selector: (row) => row.id,
+    //   },
+    //   {
+    //     name: "name",
+    //     selector: (row) => row.name,
+    //   },
+    //   {
+    //     name: "email",
+    //     selector: (row) => row.email,
+    //   },
+    // ];
+    // console.log("columnas");
+    // console.log(columns);
+
+    let lista = [];
+    var lista2 = [];
+    lista = Object.keys(data[0]);
+    lista.forEach((element) => {
+      // const letra = "(row) => row." + element;
+      // const prueba = [
+      //   {
+      //     name: { element },
+      //     selector: letra,
+      //     // selector: { `(row) => row.`${ element } },
+      //   },
+      // ];
+      const letra = "(row) => row." + element;
+      lista2.push({
+        name: { element },
+        selector: eval(letra),
       });
     });
-    let lista = [];
+    console.log(lista2);
+    // lista2 = ["id", "name", "email", "gender", "status"];
+    setColumnas(lista2);
+    console.log(columnas);
 
-    for (var key in data) {
-      lista.push(data[key]);
-      console.log(lista);
-    }
-    setColumnas(lista);
+    // let lista = [];
+
+    // for (var key in data) {
+    //   lista.push(data[key]);
+    //   console.log(lista);
+    // }
+    // setColumnas(lista);
   };
 
   // useEffect(() => {
