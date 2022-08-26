@@ -20,7 +20,7 @@ function App() {
 
     // const columns = [
     //   {
-    //     name: "ID",
+    //     name: "id",
     //     selector: (row) => row.id,
     //   },
     //   {
@@ -30,6 +30,14 @@ function App() {
     //   {
     //     name: "email",
     //     selector: (row) => row.email,
+    //   },
+    //   {
+    //     name: "gender",
+    //     selector: (row) => row.gender,
+    //   },
+    //   {
+    //     name: "status",
+    //     selector: (row) => row.status,
     //   },
     // ];
     // console.log("columnas");
@@ -53,9 +61,11 @@ function App() {
         selector: eval(letra),
       });
     });
+    console.log("lista2");
     console.log(lista2);
     // lista2 = ["id", "name", "email", "gender", "status"];
     setColumnas(lista2);
+    console.log("columnas");
     console.log(columnas);
 
     // let lista = [];
